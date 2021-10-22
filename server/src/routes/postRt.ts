@@ -1,8 +1,13 @@
 import express from "express";
-import { HomeIndex } from "../controllers/postCon";
+import { CreatePost, DeletePost, FetchAllPosts, GetOnePost, 
+    UpdatePost } from "../controllers/postCon";
 
 export const postRt: express.Router = express.Router();
-    postRt.get("/", HomeIndex);
+    postRt.post("/", CreatePost);
+    postRt.get("/", FetchAllPosts);
+    postRt.get("/:id", GetOnePost);
+    postRt.put("/:id", UpdatePost);
+    postRt.delete("/:id", DeletePost);
 
 
 
