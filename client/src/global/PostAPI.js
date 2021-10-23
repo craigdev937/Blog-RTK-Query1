@@ -1,14 +1,14 @@
 import { createApi, 
     fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const URL = "http://localhost:9000/api";
+const URL = "http://localhost:9000/api/";
 export const PostAPI = createApi({
     reducerPath: "posts",
     baseQuery: fetchBaseQuery({ baseUrl: URL }),
     tagTypes: ["Posts"],
     endpoints: (builder) => ({
-        getPosts: builder.query({
-            query: () => "posts/",
+        fetchAllPosts: builder.query({
+            query: () => `posts/`,
             providesTags: (result) => 
             // learn about revalidation:
             // https://redux-toolkit.js.org/rtk-query/usage/mutations#revalidation-example
@@ -18,7 +18,7 @@ export const PostAPI = createApi({
                     { type: "Posts", id: "LIST" },
                 ] : [{ type: "Posts", id: "LIST" }],
         }),
-        getPost: builder.query({
+        getOnePost: builder.query({
             query: (id) => `posts/${id}/`,
             providesTags: (result, error, id) => [{ type: "Posts", id }],
         }),

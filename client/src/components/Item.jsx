@@ -5,12 +5,13 @@ export const Item = ({ item }) => {
     return (
         <article className="post">
             <h2>
-                <Link to={`/posts/edit${item.id}`}>{item.title}</Link>
+                <Link to={`/posts/edit/${item.id}`}>{item.title}</Link>
             </h2>
             <p>{item.content}</p>
             <footer>
                 {item.published ?
-                    <time>{new Date(item.updated).toLocaleDateString()}</time>
+                    // <time>{new Date(item.updated).toLocaleDateString()}</time>
+                    <time>{item.updated}</time>
                     :
                     <span>Draft</span>
                 }

@@ -8,7 +8,7 @@ export const Routes = () => (
     <BrowserRouter>
         <React.Fragment>
             <Route exact path="/">
-                <Redirect to="/posts/" />
+                <Redirect to="/posts" />
             </Route>
             <Route exact path="/posts/" component={List} />
             <Route exact path="/posts/add/" component={Add} />
