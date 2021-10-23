@@ -8,7 +8,7 @@ export const List = () => {
 
     return (
         <React.Fragment>
-            <header>
+            <header className="post-header">
                 <Link to="/posts/add/">Add Post</Link>
             </header>
             {posts?.map((item) => <Item item={item} key={item.id} />)}

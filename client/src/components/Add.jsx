@@ -1,10 +1,82 @@
 import React from "react";
+import { Link, useHistory } from "react-router-dom";
+import { PostAPI } from "../global/PostAPI";
 
 export const Add = () => {
+    const history = useHistory();
+    const today = new Date().toLocaleDateString("en-US");
+    const [post, setPost] = React.useState({
+        title: "", content: "", published: true, date: today
+    });
+    const [
+        addPost, 
+        { isLoading: updating, isSuccess: saved }
+    ] = PostAPI.useAddPostMutation();
+
+    const savePost = (event) => {
+        event.preventDefault();
+        addPost(post);
+        goBack(700);
+    };
+
+    const inputHandler = (event) => {
+        const { name, value, checked } = event.target;
+        let theValue = name === "published" ? checked : value;
+        setPost({...post, [name]: theValue});
+    };
+
+    const goBack = (time) => {
+        setTimeout(() => {
+            history.push("/posts/");
+        }, time);
+    };
+
     return (
         <React.Fragment>
-            <h1>Add</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos error vitae optio cum voluptatem repudiandae eligendi tempore expedita alias ratione ducimus atque ipsum quod, magni ea cupiditate provident impedit perspiciatis.</p>
+            <form className="form" onSubmit={savePost}>
+                <h2>Add Post</h2>
+                <label>Title</label>
+                <input 
+                    required
+                    type="text" 
+                    id="title"
+                    name="title"
+                    className="form-control"
+                    onChange={inputHandler}
+                />
+                <label>Content</label>
+                <textarea 
+                    name="content" 
+                    id="content" 
+                    className="form-control" 
+                    rows="10"
+                    onChange={inputHandler}>
+                </textarea>
+
+                <input 
+                    className="form-checkbox"
+                    name="published"
+                    id="published"
+                    type="checkbox" 
+                    checked={post.published}
+                    onChange={inputHandler}
+                />
+                <label htmlFor="published">Published</label>
+                <footer className="form-footer">
+                    <Link to="/" className="btn btn-default">Cancel</Link>
+                    <button 
+                        className="btn btn-primary" 
+                        type="submit"
+                        >{updating ? "Adding..." : "Add"}
+                    </button>
+                </footer>
+                {saved && (
+                    <aside 
+                        className="alert alert-primary"
+                        >Post added. redirecting...
+                    </aside>
+                )}
+            </form>
         </React.Fragment>
     );
 };
