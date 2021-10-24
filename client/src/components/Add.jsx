@@ -8,6 +8,7 @@ export const Add = () => {
     const [post, setPost] = React.useState({
         title: "", content: "", published: true, date: today
     });
+
     const [
         addPost, 
         { isLoading: updating, isSuccess: saved }
@@ -35,33 +36,38 @@ export const Add = () => {
         <React.Fragment>
             <form className="form" onSubmit={savePost}>
                 <h2>Add Post</h2>
-                <label>Title</label>
-                <input 
-                    required
-                    type="text" 
-                    id="title"
-                    name="title"
-                    className="form-control"
-                    onChange={inputHandler}
-                />
-                <label>Content</label>
-                <textarea 
-                    name="content" 
-                    id="content" 
-                    className="form-control" 
-                    rows="10"
-                    onChange={inputHandler}>
-                </textarea>
-
-                <input 
-                    className="form-checkbox"
-                    name="published"
-                    id="published"
-                    type="checkbox" 
-                    checked={post.published}
-                    onChange={inputHandler}
-                />
-                <label htmlFor="published">Published</label>
+                <aside>
+                    <label>Title</label>
+                    <input 
+                        required
+                        type="text" 
+                        id="title"
+                        name="title"
+                        className="form-control"
+                        onChange={inputHandler}
+                    />
+                </aside>
+                <aside>
+                    <label>Content</label>
+                    <textarea 
+                        name="content" 
+                        id="content" 
+                        className="form-control" 
+                        rows="10"
+                        onChange={inputHandler}>
+                    </textarea>
+                </aside>
+                <aside>
+                    <label htmlFor="published">Published</label>
+                    <input 
+                        className="form-checkbox"
+                        name="published"
+                        id="published"
+                        type="checkbox" 
+                        checked={post.published}
+                        onChange={inputHandler}
+                    />
+                </aside>
                 <footer className="form-footer">
                     <Link to="/" className="btn btn-default">Cancel</Link>
                     <button 

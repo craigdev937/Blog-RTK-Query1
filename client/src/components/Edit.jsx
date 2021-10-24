@@ -12,10 +12,13 @@ export const Edit = ({ match }) => {
     const { data: postData, isSuccess: postDataReady } = 
     PostAPI.useGetOnePostQuery(postId);
 
-    const [deletePost, { isLoading: isDeleting, isSuccess: isDeleted }] = 
-        PostAPI.useDeletePostMutation();
-    const [editPost, { isLoading: isUpdating, isSuccess: isSaved }] = 
-        PostAPI.useEditPostMutation();
+    const [deletePost, { 
+            isLoading: isDeleting, isSuccess: isDeleted 
+        }] = PostAPI.useDeletePostMutation();
+
+    const [editPost, {
+        isLoading: isUpdating, isSuccess: isSaved 
+    }] = PostAPI.useEditPostMutation();
     
     React.useEffect(() => {
         if (postDataReady) {
