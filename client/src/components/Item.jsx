@@ -10,7 +10,6 @@ export const Item = ({ item }) => {
             <p>{item.content}</p>
             <footer>
                 {item.published ?
-                    // <time>{new Date(item.updated).toLocaleDateString()}</time>
                     <time>{item.updated}</time>
                     :
                     <span>Draft</span>

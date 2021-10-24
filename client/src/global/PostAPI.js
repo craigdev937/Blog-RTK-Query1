@@ -3,7 +3,7 @@ import { createApi,
 
 const URL = "http://localhost:9000/api/";
 export const PostAPI = createApi({
-    reducerPath: "posts",
+    reducerPath: "PostAPI",
     baseQuery: fetchBaseQuery({ baseUrl: URL }),
     tagTypes: ["Posts"],
     endpoints: (builder) => ({
@@ -20,7 +20,8 @@ export const PostAPI = createApi({
         }),
         getOnePost: builder.query({
             query: (id) => `posts/${id}/`,
-            providesTags: (result, error, id) => [{ type: "Posts", id }],
+            providesTags: (result, error, id) => 
+                [{ type: "Posts", id }],
         }),
         addPost: builder.mutation({
             query(body) {
@@ -41,7 +42,8 @@ export const PostAPI = createApi({
                     body
                 };
             },
-            invalidatesTags: (result, error, {id}) => [{ type: "Posts", id }],
+            invalidatesTags: (result, error, {id}) => 
+                [{ type: "Posts", id }],
         }),
         deletePost: builder.mutation({
             query(id) {
@@ -50,7 +52,8 @@ export const PostAPI = createApi({
                     method: "DELETE"
                 };
             },
-            invalidatesTages: (result, error, id) => [{ type: "Posts", id }],
+            invalidatesTages: (result, error, id) => 
+                [{ type: "Posts", id }],
         })
     }),
 });
